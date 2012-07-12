@@ -78,11 +78,8 @@ water_units.times do
 end
 
 File.open("output-cave.txt", "w") do |file|
-  cave[0].size.times do |index|
-    cave.each do |array|
-      file.print array[index]
-    end
-    file.print "\n"
+  cave.transpose.each do |row|
+    file.puts row.join("")
   end
 end
 
