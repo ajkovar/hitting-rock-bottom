@@ -77,16 +77,23 @@ water_units.times do
   cave[x][y] = "~"
 end
 
-cave[0].size.times do |index|
-  cave.each do |array|
-    print array[index]
+File.open("output-cave.txt", "w") do |file|
+  cave[0].size.times do |index|
+    cave.each do |array|
+      file.print array[index]
+    end
+    file.print "\n"
   end
-  print "\n"
 end
 
 File.open("output.txt", "w") do |file|
   counts = cave.map do |column|
-    column.count { |element| element=="~" }
+    count = column.count { |element| element=="~" }
+    if(column.index(" ") and column.index("~") and column.reverse.index(" ")<column.reverse.index("~"))
+      "~"
+    else
+      count
+    end
   end
 
   file.puts counts.join(" ")
