@@ -84,5 +84,13 @@ cave[0].size.times do |index|
   print "\n"
 end
 
+File.open("output.txt", "w") do |file|
+  counts = cave.map do |column|
+    column.count { |element| element=="~" }
+  end
+
+  file.puts counts.join(" ")
+end
+
 
 
